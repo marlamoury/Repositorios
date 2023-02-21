@@ -1,0 +1,39 @@
+<div style="margin-top: 20px;">
+    <h1>Repositórios Favoritos</h1>
+</div>
+
+<mat-divider></mat-divider>
+
+<div style="text-align: center; margin-top: 20px;">
+    <mat-form-field>
+        <mat-label>Linguagem</mat-label>
+        <mat-select (selectionChange)="onChangeLanguage($event)">
+            <mat-option *ngFor="let linguagem of linguagens" [value]="linguagem.descricao">
+                {{linguagem.descricao}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<mat-list>
+    <div mat-subheader>Repositórios</div>
+    <mat-list-item *ngFor="let repositorio of repositorios">
+        <button mat-icon-button
+                matTooltip="Remover"
+                (click)="onRemove(repositorio)">           
+            <mat-icon mat-list-icon>clear</mat-icon>
+        </button>
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <div mat-line> {{ repositorio.nome }} </div>
+        <div mat-line> {{ repositorio.descricao }} </div>
+        <div mat-line><strong>Proprietário:</strong> {{ repositorio.proprietario }} &nbsp; | &nbsp; <strong>Estrelas:</strong> {{ repositorio.quantidadeEstrelas }} &nbsp; | &nbsp; <strong>Endereço:</strong> {{ repositorio.htmlUrl }}</div>
+    </mat-list-item>
+</mat-list>
+
+<mat-paginator [length]="total"
+[pageSize]="quantidadePorPagina"
+[pageIndex]="pagina"
+[pageSizeOptions]="[5, 10, 25, 100]"
+(page)="onPage($event)"
+aria-label="Select page">
+</mat-paginator>
